@@ -1,25 +1,28 @@
 <template>
   <div id="app">
-    <ScrollUi/>
+    <Search />
   </div>
 </template>
 
 <script>
-import ScrollUi from "./components/ScrollUi.vue";
+import Search from "./components/Search";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
-    ScrollUi
+    Search
   }
 };
 </script>
 
 <style>
+:root {
+  --color: #ffffff;
+  --main-bg-color: #141412;
+  --spacing: 2rem;
+}
 html {
-  background: #f0cd58; 
+  background-color: var(--main-bg-color);
   overflow-x: hidden;
-  }
-
-
+}
 </style>
