@@ -1,7 +1,8 @@
 <template>
   <div class="search">
+      <h1>NASA Image Archive Search!</h1>
     <form v-on:submit.prevent="getResults(query)">
-      <input type="text" placeholder="Search here" v-model="query" />
+            <input type="text" placeholder="Try searching for ‘rover’✨" v-model="query" />
     </form>
     <div class="grid">
       <div
@@ -11,8 +12,12 @@
         v-scroll="onScroll"
         @mouseover="animateBox"
       >
-        <img @mouseover="animateBox" class="grid_item" :src="result.links[0].href" :ref="`image_${index}`"/>
-        
+        <img
+          @mouseover="animateBox"
+          class="grid_item"
+          :src="result.links[0].href"
+          :ref="`image_${index}`"
+        />
       </div>
     </div>
   </div>
@@ -37,62 +42,49 @@ export default {
     getResults(query) {
       axios
         .get(
-          "https://images-api.nasa.gov/search?q=" + query + "&media_type=image" 
+          "https://images-api.nasa.gov/search?q=" + query + "&media_type=image"
         )
         .then(response => {
-         
           this.results = response.data.collection.items;
           //this.explanation = response.data.explanation;
         });
-         console.log(this.$refs.image_0);
+      console.log(this.$refs.image_0);
     },
-     
-    onScroll() {    
-      // console.log(event);
-      // To Do: Slowly reveal the images on scroll
-     
-      //  TweenMax.fromTo(
-      //   [this.$refs.image_0, this.$refs.image_1, this.$refs.image_2, this.$refs.image_3, this.$refs.image_4, this.$refs.image_5, this.$refs.image_6, this.$refs.image_7, this.$refs.image_8],
-      //   3.5,
-      //   { x: -400,
-      //     ease: Power2.easeOut,         
-      //     yoyo: true
-      //   }, {opacity: 0, ease: Power2.easeOut,         
-      //     yoyo: true}
-       
-      // );
 
-      //  new TimelineMax()
-      	// .fromTo(this.$refs.image_0, 0.1, {opacity: 9}, {opacity: 0, ease: Linear.easeOut})  // in from left
-      	// .fromTo(this.$refs.image_1, 0.1, {opacity: 9}, {opacity: 0, ease: Linear.easeNone})  // in from right
-      	// .fromTo(this.$refs.image_2, 0.1, {opacity: 9}, {opacity: 0,  ease: Linear.easeNone}); // in from top
-    },
     animateBox() {
       TweenMax.to(
         ".grid_item",
         1.5,
-        {scale: 0.95, ease: Power2.easeOut, yoyo: true },
+        { scale: 0.95, ease: Power2.easeOut, yoyo: true },
         0.1
       );
     }
   }
 };
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .search {
   color: --color;
   /* cursor: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='52px' height='52px' viewBox='0 0 52 52' style='enable-background:new 0 0 52 52;' xml:space='preserve'%3E %3Cpath fill='%23bb3a3a' d='M29.889 30.05l-.036 21.361c-.222.213-7.654.213-7.876 0l-.007-21.358-21.52.007v-7.978l21.518.036L21.96.571h7.978l-.037 21.56 21.388.037c.213.222.213 7.654 0 7.876l-21.401.007z'/%3E %3C/svg%3E") 26 26, crosshair; */
 }
-
+h1 {
+  display: block;
+  position: relative;
+  border: none;
+  color: rgb(94, 33, 235);
+  font-size: 2.5em;
+  font-family: "Abel", sans-serif;
+  padding-top: 8%;
+  /*   margin-bottom: 1em; */
+  text-align: center;
+  overflow: auto;
+}
 img {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
   border-radius: 2%;
-   /* box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.54); */
+  /* box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.54); */
 }
 .grid {
   display: grid;
@@ -123,13 +115,12 @@ img {
   transform: rotate(-8deg);
 }
 
-
 input {
   display: block;
   position: relative;
   border: none;
   color: red;
-  font-size: 2.5em;
+  font-size: 2em;
   font-family: "Abel", sans-serif;
   border-bottom: 2px solid rgb(94, 33, 235);
   padding-top: 8%;
@@ -151,3 +142,4 @@ textarea:focus {
   color: var(--color);
 }
 </style>
+
