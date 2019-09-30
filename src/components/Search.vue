@@ -121,6 +121,8 @@ h4 {
   transform: rotate(0deg);
   text-align: center;
   white-space: wrap;
+  padding: 0 5% 0 5%
+
 }
 
 input {
