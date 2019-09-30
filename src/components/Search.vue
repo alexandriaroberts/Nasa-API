@@ -18,7 +18,7 @@
           :src="result.links[0].href"
           :ref="`image_${index}`"
         />
-     
+        <h4>{{ result.data[0].title}}</h4> 
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@ export default {
         .then(response => {
           this.results = response.data.collection.items;         
                  });
-
+          console.log(this.results);
     },
 
     animateBox() {
@@ -112,11 +112,15 @@ img {
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.54);
 }
 
-.title {
+h4 {
+  font-family: "Abel", sans-serif;
+  font-size: 16px;
+  color: var(--color);
   z-index: 100;
-  margin-top: -13%;
-  padding-bottom: 3%;
-  transform: rotate(-8deg);
+  margin-top: -15%;
+  transform: rotate(0deg);
+  text-align: center;
+  white-space: wrap;
 }
 
 input {
