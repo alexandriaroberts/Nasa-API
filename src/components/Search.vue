@@ -9,7 +9,7 @@
         class="image_wrap"
         v-for="(result,index) in results"
         :key="index"
-        v-scroll="onScroll"
+
         @mouseover="animateBox"
       >
         <img
@@ -18,6 +18,7 @@
           :src="result.links[0].href"
           :ref="`image_${index}`"
         />
+     
       </div>
     </div>
   </div>
@@ -26,6 +27,7 @@
 <script>
 import axios from "axios";
 import { TweenMax, Power2, TimelineMax } from "gsap/TweenMax";
+    
 
 export default {
   name: "Search",
@@ -34,7 +36,8 @@ export default {
       msg: "Search",
       query: "",
       results: "",
-      title: ""
+      title: "",
+      
       // explanation: ''
     };
   },
@@ -42,13 +45,12 @@ export default {
     getResults(query) {
       axios
         .get(
-          "https://images-api.nasa.gov/search?q=" + query + "&media_type=image"
+          "https://images-api.nasa.gov/search?q=" + query + "&media_type=image" 
         )
         .then(response => {
-          this.results = response.data.collection.items;
-          //this.explanation = response.data.explanation;
-        });
-      console.log(this.$refs.image_0);
+          this.results = response.data.collection.items;         
+                 });
+
     },
 
     animateBox() {
@@ -61,9 +63,11 @@ export default {
     }
   }
 };
+</script>
+
 <style scoped>
 .search {
-  color: --color;
+   color: --color;
   /* cursor: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='52px' height='52px' viewBox='0 0 52 52' style='enable-background:new 0 0 52 52;' xml:space='preserve'%3E %3Cpath fill='%23bb3a3a' d='M29.889 30.05l-.036 21.361c-.222.213-7.654.213-7.876 0l-.007-21.358-21.52.007v-7.978l21.518.036L21.96.571h7.978l-.037 21.56 21.388.037c.213.222.213 7.654 0 7.876l-21.401.007z'/%3E %3C/svg%3E") 26 26, crosshair; */
 }
 h1 {
